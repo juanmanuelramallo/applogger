@@ -1,0 +1,24 @@
+<h1>Logs</h1>
+
+<table>
+  <thead>
+    <th>ID</th>
+    <th>Timestamp</th>
+    <th>App Name</th>
+    <th>Process Name</th>
+    <th>Message</th>
+  </thead>
+  <tbody>
+    <% @logs.each do |log| %>
+      <tr>
+        <td><%= log.id %></td>
+        <td><%= l log.timestamp %></td>
+        <td><%= log.app_name %></td>
+        <td><%= log.process_name %></td>
+        <td><%= log.message %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%== pagy_nav(@pagy) %>

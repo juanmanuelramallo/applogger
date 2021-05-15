@@ -1,4 +1,8 @@
 class LogsController < ApplicationController
+  def index
+    @pagy, @logs = pagy(Log.all.order(:timestamp))
+  end
+
   def create
     parsed_logs = SyslogParser.new(message_count: message_count, body: request.body.read).parse
 
