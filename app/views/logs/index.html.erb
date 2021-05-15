@@ -1,24 +1,30 @@
-<h1>Logs</h1>
+<h1 class="font-serif text-4xl pb-4 pt-4">Logs</h1>
 
-<table>
+<table class="table-fixed w-full">
+  <% row_class = "border-b-2" %>
+  <% cell_class = "p-1 border-b-2 font-normal overflow-ellipsis overflow-hidden" %>
+  <% heading_cell_class = "bg-gray-800 text-white text-left" %>
   <thead>
-    <th>ID</th>
-    <th>Timestamp</th>
-    <th>App Name</th>
-    <th>Process Name</th>
-    <th>Message</th>
+    <tr class="<%= row_class %>">
+      <th class="w-1/12 <%= heading_cell_class %>">ID</th>
+      <th class="w-2/12 <%= heading_cell_class %>">Timestamp</th>
+      <th class="w-2/12 <%= heading_cell_class %>">App Name</th>
+      <th class="w-1/12 <%= heading_cell_class %>">Process Name</th>
+      <th class="w-6/12 <%= heading_cell_class %>">Message</th>
+    </tr>
   </thead>
   <tbody>
     <% @logs.each do |log| %>
-      <tr>
-        <td><%= log.id %></td>
-        <td><%= l log.timestamp %></td>
-        <td><%= log.app_name %></td>
-        <td><%= log.process_name %></td>
-        <td><%= log.message %></td>
+      <tr class="<%= row_class %>">
+        <td class="<%= cell_class %>"><%= log.id %></td>
+        <td class="<%= cell_class %>"><%= l log.timestamp %></td>
+        <td class="<%= cell_class %>"><%= log.app_name %></td>
+        <td class="<%= cell_class %>"><%= log.process_name %></td>
+        <td class="<%= cell_class %>"><%= log.message %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<%== pagy_nav(@pagy) %>
+<%== render partial: 'pagy/nav', locals: {pagy: @pagy} %>
+

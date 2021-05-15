@@ -1,0 +1,23 @@
+<% link = pagy_link_proc(pagy) -%>
+<%#                            -%><nav aria-label="pager" class="pagy_nav pagination bg-white px-4 py-3 flex items-center justify-center sm:px-6" role="navigation">
+<div class="flex-1 flex justify-between sm:hidden">
+  <% if pagy.prev                -%>  <span class="page prev"><%== link.call(pagy.prev, pagy_t('pagy.nav.prev'), 'aria-label="previous" class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"') %></span>
+  <% else                        -%>  <span class="page prev disabled"><%== pagy_t('pagy.nav.prev') %></span>
+  <% end                         -%>
+
+  <% if pagy.next                -%>  <span class="page next"><%== link.call(pagy.next, pagy_t('pagy.nav.next'), 'aria-label="next" class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"') %></span>
+  <% else                        -%>  <span class="page next disabled"><%== pagy_t('pagy.nav.next') %></span>
+  <% end                         -%>
+</div>
+<div class="bg-white px-4 py-3 flex items-center justify-between sm:px-6">
+  <div>
+    <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
+      <% pagy.series.each do |item| # series example: [1, :gap, 7, 8, "9", 10, 11, :gap, 36] -%>
+      <%   if    item.is_a?(Integer) -%>  <%== link.call(item, item, 'class="page bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium"') %>
+      <%   elsif item.is_a?(String)  -%>  <span aria-current="page" class="page current z-10 bg-gray-50 border-gray-500 text-gray-600 relative inline-flex items-center px-4 py-2 border text-sm font-medium"><%= item %></span>
+      <%   elsif item == :gap        -%>  <span class="page gap relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700"><%== pagy_t('pagy.nav.gap') %></span>
+      <%   end                       -%>
+    <% end                         -%>
+  </div>
+</div>
+<%#                            -%></nav>
