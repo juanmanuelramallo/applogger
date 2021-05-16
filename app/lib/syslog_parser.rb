@@ -1,7 +1,7 @@
 class SyslogParser
-  attr_reader :message_count, :body
+  attr_reader :message_count, :body, :errors
 
-  # Each named capture correlated to a column in the +logs+ table
+  # Each named capture correlates to a column in the +logs+ table
   FRAME_REGEX = Regexp.new [
     '<(?<priority>\d+)>',
     '(?<syslog_version>\d) ',
@@ -10,16 +10,23 @@ class SyslogParser
     '(?<app_name>\S+) ',
     '(?<process_name>\S+) ',
     '- (?<message>.+)'
-  ].join
+  ].join.freeze
 
   def initialize(message_count:, body:)
     @message_count = message_count
     @body = body
+    @errors = {}
   end
 
   def parse
     body_index = 0
-    message_count.times.map do |index|
+    parsed_logs = message_count.times.map do |index|
+      # Overflow error
+      if body_index >= body.size
+        errors[:message_count] = "with #{message_count} is inconsistent with body, overflowed body."
+        return []
+      end
+
       # Get frame size
       frame = /\A(\d)+/.match(body[body_index..])[0].to_i
 
@@ -34,5 +41,13 @@ class SyslogParser
 
       FRAME_REGEX.match(current_frame).named_captures
     end
+
+    # Missing frames to parse
+    if body_index != body.size
+      errors[:message_count] = "with #{message_count} is inconsistent with body, missing frames to parse."
+      return []
+    end
+
+    parsed_logs
   end
 end
