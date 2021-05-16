@@ -25,5 +25,9 @@ RSpec.describe 'Logs' do
     it 'creates two logs' do
       expect { subject }.to change { Log.count }.by(2)
     end
+
+    it 'enques a job to transform the logs' do
+      expect { subject }.to change { TransformLogsWorker.jobs.size }.by(1)
+    end
   end
 end
