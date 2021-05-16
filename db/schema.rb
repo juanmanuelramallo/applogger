@@ -10,10 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_15_215304) do
+ActiveRecord::Schema.define(version: 2021_05_16_202524) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "entries", force: :cascade do |t|
+    t.bigint "log_id"
+    t.string "action_name", null: false
+    t.string "controller_name", null: false
+    t.string "country_code"
+    t.string "format", null: false
+    t.string "ip", null: false
+    t.string "user_agent", null: false
+    t.datetime "timestamp", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["log_id"], name: "index_entries_on_log_id"
+  end
 
   create_table "logs", force: :cascade do |t|
     t.integer "priority", null: false
@@ -26,4 +40,6 @@ ActiveRecord::Schema.define(version: 2021_05_15_215304) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
+
+  add_foreign_key "entries", "logs"
 end

@@ -6,7 +6,9 @@ class LogsController < ApplicationController
   def create
     parser = SyslogParser.new(message_count: message_count, body: request.body.read)
 
-    Log.create(parser.parse)
+    logs = Log.create(parser.parse)
+
+    TransformLogsWorker.perform_async(logs.map(&:id))
   end
 
   private
