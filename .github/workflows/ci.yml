@@ -19,6 +19,8 @@ jobs:
       RAILS_ENV: test
       HTTP_BASIC_AUTH_NAME: authname
       HTTP_BASIC_AUTH_PASSWORD: authpassword
+      GEOIP_GEOLITE2_COUNTRY_FILENAME: GeoLite2-Country.mmdb
+      MAXMIND_LICENSE_KEY: ejLzWgHyDqnOOoTy
 
     services:
       postgres:
@@ -39,6 +41,10 @@ jobs:
     - name: Install PostgreSQL 11 client
       run: |
         sudo apt-get -yqq install libpq-dev
+    - name: MaxMind Database
+      run: |
+        wget --quiet --output-document "./maxmind.mmdb" "https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-Country&license_key=${{ env.MAXMIND_LICENSE_KEY }}&suffix=tar.gz"
+        tar -xvf ./maxmind.mmdb --directory ./ --no-anchored --strip-components=1 ${{ env.GEOIP_GEOLITE2_COUNTRY_FILENAME }}
     - uses: actions/cache@v2
       with:
         path: vendor/bundle
