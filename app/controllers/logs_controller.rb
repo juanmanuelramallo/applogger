@@ -4,9 +4,9 @@ class LogsController < ApplicationController
   end
 
   def create
-    parsed_logs = SyslogParser.new(message_count: message_count, body: request.body.read).parse
+    parser = SyslogParser.new(message_count: message_count, body: request.body.read)
 
-    Log.create(parsed_logs)
+    Log.create(parser.parse)
   end
 
   private

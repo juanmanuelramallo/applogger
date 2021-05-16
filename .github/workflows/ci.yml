@@ -54,3 +54,5 @@ jobs:
         bin/rails assets:precompile
     - name: Linter
       run: bundle exec standardrb
+    - name: Tests
+      run: bundle exec rspec
