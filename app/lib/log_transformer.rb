@@ -19,10 +19,9 @@ class LogTransformer
   def call
     match_data = MATCHER_REGEXP.match(log.message)
 
-    return if match_data.nil? || match_data[:data].empty?
+    return {} if match_data.nil? || match_data[:data].empty?
 
     parsed_data = JSON.parse(match_data[:data])
-    Rails.logger.info parsed_data
 
     TRANSFORMABLE_VALUES.map do |value_name|
       transformer = nil
