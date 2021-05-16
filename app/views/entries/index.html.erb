@@ -1,0 +1,32 @@
+<h1 class="font-serif text-4xl pb-4 pt-4">Entries</h1>
+
+<table class="table-auto w-full">
+  <% row_class = "border-b-2" %>
+  <% cell_class = "p-1 border-b-2 font-normal overflow-ellipsis overflow-hidden" %>
+  <% heading_cell_class = "bg-gray-800 text-white text-left" %>
+  <thead>
+    <tr class="<%= row_class %>">
+      <th class="<%= heading_cell_class %>">ID</th>
+      <th class="<%= heading_cell_class %>">Timestamp</th>
+      <th class="<%= heading_cell_class %>">User Agent</th>
+      <th class="<%= heading_cell_class %>">Country Code</th>
+      <th class="<%= heading_cell_class %>">Action/Controller</th>
+      <th class="<%= heading_cell_class %>">Format</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @entries.each do |entry| %>
+      <tr class="<%= row_class %>">
+        <td class="<%= cell_class %>"><%= entry.id %></td>
+        <td class="<%= cell_class %>"><%= l entry.timestamp %></td>
+        <td class="<%= cell_class %>"><%= entry.user_agent %></td>
+        <td class="<%= cell_class %>"><%= entry.country_code %></td>
+        <td class="<%= cell_class %>"><%= "#{entry.controller_name}##{entry.action_name}" %></td>
+        <td class="<%= cell_class %>"><%= entry.format %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%== render partial: 'pagy/nav', locals: {pagy: @pagy} %>
+
