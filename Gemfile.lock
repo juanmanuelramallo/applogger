@@ -83,6 +83,7 @@ GEM
     mail (2.7.1)
       mini_mime (>= 0.1.1)
     marcel (1.0.1)
+    maxminddb (0.1.22)
     method_source (1.0.0)
     mini_mime (1.0.3)
     minitest (5.14.4)
@@ -162,6 +163,7 @@ DEPENDENCIES
   byebug
   dotenv-rails
   listen (~> 3.3)
+  maxminddb
   pagy
   pg (~> 1.1)
   puma (~> 5.0)
