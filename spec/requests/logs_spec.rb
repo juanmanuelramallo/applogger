@@ -9,8 +9,8 @@ RSpec.describe 'Logs' do
       create(:log, message: 'Another message')
       subject
 
-      expect(response.body).to include 'Logging a message'
-      expect(response.body).to include 'Another message'
+      assert_select 'td', 'Logging a message'
+      assert_select 'td', 'Another message'
     end
   end
 

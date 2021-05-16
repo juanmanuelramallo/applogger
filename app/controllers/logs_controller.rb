@@ -1,6 +1,6 @@
 class LogsController < ApplicationController
   def index
-    @pagy, @logs = pagy(Log.all.order(:timestamp))
+    @pagy, @logs = pagy(Log.all.order(timestamp: :desc))
   end
 
   def create

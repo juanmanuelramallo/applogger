@@ -7,9 +7,6 @@ FactoryBot.define do
     country_code { 'BO' }
     user_agent { 'Spotify/1.0' }
     timestamp { Time.now }
-
-    trait :with_log do
-      log
-    end
+    log
   end
 end

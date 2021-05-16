@@ -5,7 +5,7 @@ RSpec.describe TransformLogsWorker, type: :worker do
     subject { described_class.perform_async(log_ids) }
 
     let(:log_ids) { logs.map(&:id) }
-    let(:entry) { create(:entry, :with_log) }
+    let(:entry) { create(:entry) }
     let(:logs) do
       [
         create(:log, message: 'I, [2021-05-15T23:56:26.706865 #4] INFO -- : '\
