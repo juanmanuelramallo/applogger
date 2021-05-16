@@ -8,6 +8,7 @@ class LogTransformer
     ['ip', IpTransformer, 'country_code'],
     'user_agent'
   ].freeze
+  MATCHER_REGEXP = /#{TRANSFORMABLE_KEY}=(?<data>\{.+\})/.freeze
 
   attr_reader :log
 
@@ -16,7 +17,7 @@ class LogTransformer
   end
 
   def call
-    match_data = /#{TRANSFORMABLE_KEY}=(?<data>\{.+\})/.match(log.message)
+    match_data = MATCHER_REGEXP.match(log.message)
 
     return if match_data.nil? || match_data[:data].empty?
 
