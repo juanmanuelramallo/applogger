@@ -25,6 +25,9 @@ TODO:
 - [ ] Search
 - [ ] Graphs
 
+## Development
+Download the GeoLite2 Country database from your MaxMind's account and set the env var `GEOIP_GEOLITE2_COUNTRY_FILENAME` with the path to your downloaded database.
+
 ## Deployment to Heroku
 1. Add the buildpack https://github.com/danstiner/heroku-buildpack-geoip-geolite2 to be able to use MaxMind's Geolite2 DB. This is used to convert IP values into country codes.
 2. Get a MaxMind license key and set the env var `MAXMIND_LICENSE_KEY` with the license key.
