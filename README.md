@@ -1,24 +1,26 @@
-# README
+# AppLogger
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Minimal syslog drainer (works with Heroku) that stores logs in a PostgreSQL DB, [TODO] transforms them into aggregatable information and [TODO] display them in a friendly manner.
 
-Things you may want to cover:
+The goal is to build something simple yet useful.
 
-* Ruby version
+## Extraction
+- Provides an HTTP POST endpoint to feed logs into the logger.
+- HTTP header `Logplex-Msg-Count` must be set with the amount of messages sent in the body of the request, see [Heroku's docs](https://devcenter.heroku.com/articles/log-drains#https-drains).
+- Auth using Basic Authentication
+- Parses logs according to [RFC5424](https://datatracker.ietf.org/doc/html/rfc5424).
 
-* System dependencies
+## Transformers
 
-* Configuration
+TODO:
+- [ ] Set up a background runner
+- [x] IP into country code.
+- [ ] User agent into device.
 
-* Database creation
+## Visualization
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+TODO:
+- [x] Tailwind
+- [ ] Filters
+- [ ] Search
+- [ ] Graphs
