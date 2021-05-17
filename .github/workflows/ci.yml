@@ -19,6 +19,7 @@ jobs:
       RAILS_ENV: test
       HTTP_BASIC_AUTH_NAME: authname
       HTTP_BASIC_AUTH_PASSWORD: authpassword
+      GEOIP_GEOLITE2_PATH: .
       GEOIP_GEOLITE2_COUNTRY_FILENAME: GeoLite2-Country.mmdb
       MAXMIND_LICENSE_KEY: ejLzWgHyDqnOOoTy
 
