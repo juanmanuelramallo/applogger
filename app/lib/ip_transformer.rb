@@ -19,6 +19,11 @@ class IpTransformer
   private
 
   def ip_database
-    MaxMindDB.new(ENV.fetch('GEOIP_GEOLITE2_COUNTRY_FILENAME'), MaxMindDB::LOW_MEMORY_FILE_READER)
+    MaxMindDB.new(
+      File.join(
+        ENV.fetch('GEOIP_GEOLITE2_PATH'),
+        ENV.fetch('GEOIP_GEOLITE2_COUNTRY_FILENAME')
+      ), MaxMindDB::LOW_MEMORY_FILE_READER
+    )
   end
 end
