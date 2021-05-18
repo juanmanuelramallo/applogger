@@ -11,6 +11,8 @@ class TransformLogsWorker
       attributes = LogTransformer.new(log).call
       if attributes.present?
         Entry.create!(attributes.merge(timestamp: log.timestamp, log_id: log.id))
+      else
+        log.destroy!
       end
     end
   end
