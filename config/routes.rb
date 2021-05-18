@@ -15,6 +15,7 @@ end
 Rails.application.routes.draw do
   mount Sidekiq::Web, at: '/sidekiq'
 
+  resources :dashboard, only: :index
   resources :logs, only: [:create, :index]
   resources :entries, only: :index
 
