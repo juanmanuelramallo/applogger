@@ -5,7 +5,6 @@ class LogTransformer
     'controller_name',
     'format',
     'ip',
-    ['ip', IpTransformer, 'country_code'],
     'user_agent'
   ].freeze
   MATCHER_REGEXP = /#{TRANSFORMABLE_KEY}=(?<data>\{.+\})/.freeze
@@ -23,15 +22,8 @@ class LogTransformer
 
     parsed_data = JSON.parse(match_data[:data])
 
-    TRANSFORMABLE_VALUES.map do |value_name|
-      transformer = nil
-      destination_name = nil
-      value_name, transformer, destination_name = value_name if value_name.is_a? Array
-
-      value = parsed_data.fetch(value_name)
-      value = transformer.call(value) if transformer.present?
-
-      [destination_name || value_name, value]
-    end.to_h
+    parsed_data.slice(*TRANSFORMABLE_VALUES).merge(
+      'country_code' => IpTransformer.call(parsed_data['ip'])
+    )
   end
 end
