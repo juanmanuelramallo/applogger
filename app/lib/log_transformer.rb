@@ -1,8 +1,10 @@
 class LogTransformer
   TRANSFORMABLE_KEY = 'podcastfeeder-analytics'
   TRANSFORMABLE_VALUES = [
-    'action_name',
-    'controller_name',
+    'path',
+    'referrer',
+    'query_string',
+    'http_method',
     'format',
     'ip',
     'user_agent'

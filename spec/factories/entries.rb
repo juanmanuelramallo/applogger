@@ -1,7 +1,9 @@
 FactoryBot.define do
   factory :entry do
-    action_name { 'show' }
-    controller_name { 'podcasts' }
+    path { '/' }
+    query_string { 'test=yes' }
+    referrer { '' }
+    http_method { 'GET' }
     format { 'application/rss+xml' }
     ip { '105.54.36.2' }
     country_code { 'BO' }

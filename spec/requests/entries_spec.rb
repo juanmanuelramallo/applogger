@@ -6,12 +6,12 @@ RSpec.describe 'Entries' do
 
     it 'renders entries' do
       create(:entry, user_agent: 'Safari')
-      create(:entry, action_name: 'index', controller_name: 'testing')
+      create(:entry, path: '/index')
 
       subject
 
       assert_select 'td', 'Safari'
-      assert_select 'td', 'testing#index'
+      assert_select 'td', '/index'
     end
   end
 end

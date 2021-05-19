@@ -10,15 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_16_202524) do
+ActiveRecord::Schema.define(version: 2021_05_19_220055) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "entries", force: :cascade do |t|
     t.bigint "log_id"
-    t.string "action_name", null: false
-    t.string "controller_name", null: false
     t.string "country_code"
     t.string "format", null: false
     t.string "ip", null: false
@@ -26,6 +24,12 @@ ActiveRecord::Schema.define(version: 2021_05_16_202524) do
     t.datetime "timestamp", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "path", default: ""
+    t.string "query_string", default: "", null: false
+    t.string "referrer", default: "", null: false
+    t.string "http_method", default: ""
+    t.string "app_name", default: ""
+    t.string "process_name", default: ""
     t.index ["log_id"], name: "index_entries_on_log_id"
   end
 
