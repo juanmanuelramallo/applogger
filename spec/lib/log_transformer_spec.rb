@@ -7,7 +7,7 @@ RSpec.describe LogTransformer do
     let(:log) do
       create(:log, message: 'I, [2021-05-15T23:56:26.706865 #4] INFO -- : '\
              '[10f6cec9-3d36-4521-b304-562baffdfc72] podcastfeeder-analytics='\
-             '{"action_name":"show","controller_name":"podcasts","format":'\
+             '{"path":"/podcasts","http_method":"GET","query_string":"","referrer":"","format":'\
              '"application/rss+xml","ip":"34.77.30.1","user_agent":"Spotify/1.0"}')
     end
 
@@ -17,12 +17,14 @@ RSpec.describe LogTransformer do
 
     it 'extracts and transforms with the correct values' do
       expect(subject).to include(
-        'action_name' => 'show',
-        'controller_name' => 'podcasts',
+        'path' => '/podcasts',
+        'http_method' => 'GET',
         'country_code' => 'BE',
         'format' => 'application/rss+xml',
         'ip' => '34.77.30.1',
-        'user_agent' => 'Spotify/1.0'
+        'user_agent' => 'Spotify/1.0',
+        'query_string' => '',
+        'referrer' => ''
       )
     end
   end

@@ -10,7 +10,7 @@
       <th class="<%= heading_cell_class %>">Timestamp</th>
       <th class="<%= heading_cell_class %>">User Agent</th>
       <th class="<%= heading_cell_class %>">Country Code</th>
-      <th class="<%= heading_cell_class %>">Action/Controller</th>
+      <th class="<%= heading_cell_class %>">Path</th>
       <th class="<%= heading_cell_class %>">Format</th>
     </tr>
   </thead>
@@ -21,7 +21,7 @@
         <td class="<%= cell_class %>"><%= l entry.timestamp %></td>
         <td class="<%= cell_class %>"><%= entry.user_agent %></td>
         <td class="<%= cell_class %>"><%= entry.country_code %></td>
-        <td class="<%= cell_class %>"><%= "#{entry.controller_name}##{entry.action_name}" %></td>
+        <td class="<%= cell_class %>"><%= entry.path %></td>
         <td class="<%= cell_class %>"><%= entry.format %></td>
       </tr>
     <% end %>

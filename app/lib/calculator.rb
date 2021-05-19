@@ -21,7 +21,7 @@ class Calculator
   end
 
   def path_count
-    @path_count ||= entries.pluck(:action_name, :controller_name).uniq.size
+    @path_count ||= entries.pluck(:path).uniq.size
   end
 
   def browsers_count
