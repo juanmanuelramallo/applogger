@@ -3,7 +3,9 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '~> 2.7.2'
 
+gem 'chartkick', '~> 4.0.4'
 gem 'dotenv-rails'
+gem 'groupdate', '~> 5.2.2'
 gem 'maxminddb'
 gem 'pagy'
 gem 'pg', '~> 1.1'
