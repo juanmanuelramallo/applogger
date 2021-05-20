@@ -1,15 +1,9 @@
 class Calculator
-  MAX_PERIOD_IN_DAYS = 90
+  attr_reader :entries
 
-  attr_reader :from_time, :to_time
-
-  def initialize(from_time:, to_time:)
-    @from_time = from_time
-    @to_time = to_time
-
-    if (to_time.to_date - from_time.to_date).to_i > MAX_PERIOD_IN_DAYS
-      @from_time = to_time - 1.week
-    end
+  # @param entries [Entry::ActiveRecord_Relation]
+  def initialize(entries)
+    @entries = entries
   end
 
   def count
@@ -34,11 +28,5 @@ class Calculator
 
   def entries_count_by_country
     entries.group(:country_code).count
-  end
-
-  private
-
-  def entries
-    Entry.where(timestamp: from_time..to_time)
   end
 end

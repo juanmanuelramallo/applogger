@@ -1,7 +1,7 @@
 <header class="text-gray-600">
   <div class="mx-8 flex flex-wrap p-3 flex-col md:flex-row items-center">
     <a class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0" href="<%= root_path %>">
-      <span class="ml-3 text-xl">AppLogger</span>
+      <span class="text-xl">AppLogger</span>
     </a>
     <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
       <% active_class = 'bg-gray-100 rounded' %>
@@ -17,4 +17,10 @@
       <% end %>
     </nav>
   </div>
+
+  <hr class="mx-8">
+
+  <h1 class="mx-8 py-2 px-3 font-medium">
+    <%= content_for(:title) %>
+  </h1>
 </header>

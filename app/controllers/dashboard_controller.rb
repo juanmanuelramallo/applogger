@@ -1,9 +1,21 @@
 class DashboardController < ApplicationController
   def index
-    @calculator = Calculator.new(from_time: from_time, to_time: to_time)
+    @dashboard = DashboardPresenter.new(from_time: from_time, to_time: to_time)
+    @calculator = Calculator.new(entries)
   end
 
   private
+
+  def entries
+    @entries ||= begin
+      where_options = entries_params.to_h.select { |_key, value| value.present? }
+      Entry.where(where_options.merge(timestamp: from_time..to_time))
+    end
+  end
+
+  def entries_params
+    params.permit(:user_agent, :path, :country_code)
+  end
 
   def from_time
     @from_time ||= begin

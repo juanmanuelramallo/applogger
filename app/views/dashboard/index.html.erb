@@ -3,84 +3,112 @@
   <%= javascript_include_tag 'dashboard' %>
 <% end %>
 
-<h1 class="font-serif text-4xl pb-4 pt-4">Dashboard</h1>
-
-<%= form_tag dashboard_index_path, method: :get do %>
-  <% input_class = "border-0 border-b-2" %>
-  <p>Displaying data from
-    <%= date_field_tag 'from_date', @calculator.from_time.to_date, class: input_class %> to
-    <%= date_field_tag 'to_date', @calculator.to_time.to_date, class: input_class %>
-    <%= submit_tag "Apply", class: 'ml-2 cursor-pointer rounded-lg py-1 px-4 border-2 border-gray-100 bg-transparent hover:bg-gray-100' %>
-  </p>
-<% end %>
+<%= content_for(:title) { 'Dashboard' } %>
 
 <% svg_class = "w-12 h-12 mb-3 inline-block text-blue-500" %>
-<section class="text-gray-600 body-font mt-4">
-  <div class="container px-5 py-5 mx-auto">
-    <div class="flex flex-wrap -m-4 text-center">
-
-      <div class="p-4 md:w-1/4 sm:w-1/2 w-full">
-        <div class="shadow px-4 py-6 rounded-lg">
-          <svg xmlns="http://www.w3.org/2000/svg" stroke-linecap="round" class="<%= svg_class %>" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-          </svg>
-          <h2 class="title-font font-medium text-3xl text-gray-900"><%= @calculator.count %></h2>
-          <p class="leading-relaxed">Requests</p>
+<div class="grid lg:grid-cols-12 xl:grid-cols-12">
+  <div class="lg:col-span-3 xl:col-span-2">
+    <div class="rounded-lg shadow h-full p-4">
+      <%= form_tag dashboard_index_path, method: :get do %>
+        <% input_class = "w-full border-b-2 border-gray-200 mb-2 rounded" %>
+        <% label_class = "w-full block text-sm font-medium text-gray-600" %>
+        <div>
+          <%= label_tag 'from_date', 'From', class: label_class %>
+          <%= date_field_tag 'from_date', @from_time.to_date, class: input_class %>
         </div>
-      </div>
-
-      <div class="p-4 md:w-1/4 sm:w-1/2 w-full">
-        <div class="shadow px-4 py-6 rounded-lg">
-          <svg xmlns="http://www.w3.org/2000/svg" class="<%= svg_class %>" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-          </svg>
-          <h2 class="title-font font-medium text-3xl text-gray-900"><%= @calculator.countries_count %></h2>
-          <p class="leading-relaxed">Countries</p>
+        <div>
+          <%= label_tag 'to_date', 'To', class: label_class %>
+          <%= date_field_tag 'to_date', @to_time.to_date, class: input_class %>
         </div>
-      </div>
-
-      <div class="p-4 md:w-1/4 sm:w-1/2 w-full">
-        <div class="shadow px-4 py-6 rounded-lg">
-          <svg xmlns="http://www.w3.org/2000/svg" class="<%= svg_class %>" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
-          </svg>
-          <h2 class="title-font font-medium text-3xl text-gray-900"><%= @calculator.path_count %></h2>
-          <p class="leading-relaxed">Endpoints</p>
+        <div>
+          <%= label_tag 'user_agent', 'User agent', class: label_class %>
+          <%= select_tag 'user_agent', options_for_select([nil, *@dashboard.user_agents], params[:user_agent]), class: input_class %>
         </div>
-      </div>
-
-      <div class="p-4 md:w-1/4 sm:w-1/2 w-full">
-        <div class="shadow px-4 py-6 rounded-lg">
-          <svg xmlns="http://www.w3.org/2000/svg" class="<%= svg_class %>" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
-          </svg>
-          <h2 class="title-font font-medium text-3xl text-gray-900"><%= @calculator.browsers_count %></h2>
-          <p class="leading-relaxed">Browsers</p>
+        <div>
+          <%= label_tag 'path', 'Path', class: label_class %>
+          <%= select_tag 'path', options_for_select([nil, *@dashboard.paths], params[:path]), class: input_class %>
         </div>
-      </div>
+        <div>
+          <%= label_tag 'country_code', 'Country', class: label_class %>
+          <%= select_tag 'country_code', options_for_select([nil, *@dashboard.country_codes], params[:country_code]), class: input_class %>
+        </div>
+
+        <%= submit_tag "Apply", class: 'text-gray-600 font-medium mt-2 cursor-pointer w-full rounded py-1 px-4 border-2 border-gray-200 bg-transparent hover:bg-gray-100' %>
+        <%= link_to "Clear all", dashboard_index_path, class: 'text-gray-600 block mt-2' %>
+      <% end %>
+
     </div>
   </div>
-</section>
 
-<section class="text-gray-600 body-font">
-  <div class="container px-5 py-5 mx-auto">
-    <div class="flex flex-wrap -m-4 text-center">
+  <div class="lg:col-span-9 xl:col-span-10">
+    <section class="text-gray-600 body-font">
+      <div class="container px-5 mx-auto">
+        <div class="flex flex-wrap -m-4 text-center">
 
-      <%# Requests %>
-      <div class="p-4 md:w-2/4 w-full">
-        <div class="shadow px-4 py-6 rounded-lg">
-          <%= line_chart @calculator.entries_count_by_day %>
-          <p class="text-center text-sm">Requests count per day</p>
+          <div class="p-4 md:w-1/4 sm:w-1/2 w-full">
+            <div class="shadow px-4 py-6 rounded-lg">
+              <svg xmlns="http://www.w3.org/2000/svg" stroke-linecap="round" class="<%= svg_class %>" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+              </svg>
+              <h2 class="title-font font-medium text-3xl text-gray-900"><%= @calculator.count %></h2>
+              <p class="leading-relaxed">Requests</p>
+            </div>
+          </div>
+
+          <div class="p-4 md:w-1/4 sm:w-1/2 w-full">
+            <div class="shadow px-4 py-6 rounded-lg">
+              <svg xmlns="http://www.w3.org/2000/svg" class="<%= svg_class %>" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <h2 class="title-font font-medium text-3xl text-gray-900"><%= @calculator.countries_count %></h2>
+              <p class="leading-relaxed">Countries</p>
+            </div>
+          </div>
+
+          <div class="p-4 md:w-1/4 sm:w-1/2 w-full">
+            <div class="shadow px-4 py-6 rounded-lg">
+              <svg xmlns="http://www.w3.org/2000/svg" class="<%= svg_class %>" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+              </svg>
+              <h2 class="title-font font-medium text-3xl text-gray-900"><%= @calculator.path_count %></h2>
+              <p class="leading-relaxed">Endpoints</p>
+            </div>
+          </div>
+
+          <div class="p-4 md:w-1/4 sm:w-1/2 w-full">
+            <div class="shadow px-4 py-6 rounded-lg">
+              <svg xmlns="http://www.w3.org/2000/svg" class="<%= svg_class %>" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+              </svg>
+              <h2 class="title-font font-medium text-3xl text-gray-900"><%= @calculator.browsers_count %></h2>
+              <p class="leading-relaxed">Browsers</p>
+            </div>
+          </div>
         </div>
       </div>
+    </section>
 
-      <%# Countries %>
-      <div class="p-4 md:w-2/4 w-full">
-        <div class="shadow px-4 py-6 rounded-lg">
-          <%= geo_chart @calculator.entries_count_by_country %>
-          <p class="text-center text-sm">Requests count per country</p>
+    <section class="text-gray-600 body-font">
+      <div class="container px-5 mx-auto">
+        <div class="flex flex-wrap -m-4 text-center">
+
+          <%# Requests %>
+          <div class="p-4 md:w-2/4 w-full">
+            <div class="shadow px-4 py-6 rounded-lg">
+              <%= line_chart @calculator.entries_count_by_day %>
+              <p class="text-center text-sm">Requests count per day</p>
+            </div>
+          </div>
+
+          <%# Countries %>
+          <div class="p-4 md:w-2/4 w-full">
+            <div class="shadow px-4 py-6 rounded-lg">
+              <%= geo_chart @calculator.entries_count_by_country %>
+              <p class="text-center text-sm">Requests count per country</p>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
+    </section>
   </div>
-</section>
+</div>

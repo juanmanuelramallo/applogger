@@ -81,6 +81,8 @@ GEM
     factory_bot_rails (6.2.0)
       factory_bot (~> 6.2.0)
       railties (>= 5.0.0)
+    faker (2.15.1)
+      i18n (>= 1.6, < 2)
     ffi (1.15.0)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
@@ -226,6 +228,7 @@ DEPENDENCIES
   chartkick (~> 4.0.4)
   dotenv-rails
   factory_bot_rails (~> 6.2.0)
+  faker
   groupdate (~> 5.2.2)
   listen (~> 3.3)
   maxminddb
