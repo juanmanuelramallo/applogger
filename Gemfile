@@ -17,6 +17,7 @@ gem 'sidekiq', '~> 6.2.1'
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'factory_bot_rails', '~> 6.2.0'
+  gem 'faker'
   gem 'rspec-rails', '~> 5.0.1'
   gem 'standard', '~> 1.1.1'
 end

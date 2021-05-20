@@ -1,14 +1,14 @@
 FactoryBot.define do
   factory :entry do
-    path { '/' }
+    path { "/#{Faker::Internet.slug}" }
     query_string { 'test=yes' }
-    referrer { '' }
-    http_method { 'GET' }
-    format { 'application/rss+xml' }
-    ip { '105.54.36.2' }
-    country_code { 'BO' }
-    user_agent { 'Spotify/1.0' }
-    timestamp { Time.now }
+    referrer { Faker::Internet.url }
+    http_method { ['GET', 'POST', 'PUT'].sample }
+    format { ['application/rss+xml', 'text/html', 'text/javascript', 'application/csv', 'text/css'].sample }
+    ip { Faker::Internet.public_ip_v4_address }
+    country_code { Faker::Address.country_code }
+    user_agent { Faker::Internet.user_agent }
+    timestamp { Faker::Time.between(from: Time.now - 3.months, to: Time.now) }
     log
   end
 end
