@@ -3,6 +3,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '~> 2.7.2'
 
+gem 'browser', '~> 5.3.1', require: "browser/browser"
 gem 'chartkick', '~> 4.0.4'
 gem 'dotenv-rails'
 gem 'groupdate', '~> 5.2.2'
