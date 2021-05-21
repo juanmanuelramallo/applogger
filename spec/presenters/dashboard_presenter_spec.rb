@@ -14,7 +14,7 @@ RSpec.describe DashboardPresenter do
   describe '#user_agents' do
     subject { presenter.user_agents }
 
-    it { is_expected.to contain_exactly('iTMS') }
+    it { is_expected.to contain_exactly(['iTMS', 'iTMS']) }
   end
 
   describe '#paths' do
