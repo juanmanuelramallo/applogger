@@ -15,7 +15,7 @@ RSpec.describe TransformLogsWorker, type: :worker do
         create(:log, message: 'This log will be removed'),
         create(:log, message: 'I, [2021-05-15T23:56:26.706865 #4] INFO -- : '\
                '[10f6cec9-3d36-4521-b304-562baffdfc72] podcastfeeder-analytics='\
-               '{"path":"/podcasts","http_method":"GET","query_string":"","referrer":"","format":'\
+               '{"path":"/podcasts","http_method":"GET","query_string":"","referrer":null,"format":'\
                '"application/rss+xml","ip":"34.77.30.1","user_agent":"Spotify/1.0"}'),
         entry.log
       ]
