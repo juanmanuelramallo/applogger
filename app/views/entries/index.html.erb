@@ -12,6 +12,7 @@
       <th class="<%= heading_cell_class %>">Country Code</th>
       <th class="<%= heading_cell_class %>">Path</th>
       <th class="<%= heading_cell_class %>">Format</th>
+      <th class="<%= heading_cell_class %>"></th>
     </tr>
   </thead>
   <tbody>
@@ -19,10 +20,17 @@
       <tr class="<%= row_class %>">
         <td class="<%= cell_class %>"><%= entry.id %></td>
         <td class="<%= cell_class %>"><%= l entry.timestamp %></td>
-        <td class="<%= cell_class %>"><%= entry.user_agent %></td>
+        <td class="<%= cell_class %>" title="<%= entry.user_agent %>">
+          <% if entry.rss_reader? %>
+            <span class="bg-blue-500 px-2 rounded text-white">RSS Reader</span>
+          <% else %>
+            <span class="px-2 rounded"><%= entry.browser.name %></span>
+          <% end %>
+        </td>
         <td class="<%= cell_class %>"><%= entry.country_code %></td>
         <td class="<%= cell_class %>"><%= entry.path %></td>
         <td class="<%= cell_class %>"><%= entry.format %></td>
+        <td><%= link_to 'Show', entry, class: "cursor-pointer text-blue-600 hover:underline" %></td>
       </tr>
     <% end %>
   </tbody>

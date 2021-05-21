@@ -8,8 +8,7 @@
       <%
         [
           ['Dashboard', dashboard_index_path],
-          ['Entries', entries_path],
-          ['Logs', logs_path]
+          ['Entries', entries_path]
         ].each do |name, path|
       %>
         <% active = request.path == path || (request.path == root_path && name == 'Entries') %>

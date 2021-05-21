@@ -17,7 +17,7 @@ Rails.application.routes.draw do
 
   resources :dashboard, only: :index
   resources :logs, only: [:create, :index]
-  resources :entries, only: :index
+  resources :entries, only: [:index, :show]
 
-  root to: 'entries#index'
+  root to: 'dashboard#index'
 end

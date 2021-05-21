@@ -7,7 +7,12 @@ class DashboardPresenter
   end
 
   def user_agents
-    entries.pluck(:user_agent).uniq.sort
+    entries.pluck(:user_agent).uniq.map do |user_agent|
+      browser = Browser.new(user_agent)
+      name = browser.unknown? ? user_agent : browser.name
+
+      [name, user_agent]
+    end.sort_by(&:first)
   end
 
   def paths

@@ -1,0 +1,10 @@
+<%= content_for(:title) { "Entry ##{@entry.id}" } %>
+
+<div class="grid sm:grid-cols-2">
+  <% Entry.columns.each do |column| %>
+    <div class="mb-4">
+      <dt class="text-gray-600"><%= column.name.humanize %></dt>
+      <dd class=""><%= @entry.public_send(column.name).presence || ' — ' %></dd>
+    </div>
+  <% end %>
+</div>
