@@ -11,7 +11,7 @@
           ['Entries', entries_path]
         ].each do |name, path|
       %>
-        <% active = request.path == path || (request.path == root_path && name == 'Entries') %>
+        <% active = request.path == path || (request.path == root_path && name == 'Dashboard') %>
         <%= link_to name, path, class: "py-1 px-3 mr-5 hover:text-gray-900 #{active_class if active}" %>
       <% end %>
     </nav>
