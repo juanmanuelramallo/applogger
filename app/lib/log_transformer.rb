@@ -1,5 +1,4 @@
 class LogTransformer
-  TRANSFORMABLE_KEY = 'podcastfeeder-analytics'
   TRANSFORMABLE_VALUES = [
     'path',
     'referrer',
@@ -9,7 +8,7 @@ class LogTransformer
     'ip',
     'user_agent'
   ].freeze
-  MATCHER_REGEXP = /#{TRANSFORMABLE_KEY}=(?<data>\{.+\})/.freeze
+  MATCHER_REGEXP = /#{ENV.fetch('LOG_LINE_KEY')}=(?<data>\{.+\})/.freeze
 
   attr_reader :log
 
