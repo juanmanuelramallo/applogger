@@ -208,6 +208,7 @@ GEM
     standard (1.1.1)
       rubocop (= 1.14.0)
       rubocop-performance (= 1.11.2)
+    syslog_parser (0.1.0)
     tailwindcss-rails (0.3.3)
       rails (>= 6.0.0)
     thor (1.1.0)
@@ -242,6 +243,7 @@ DEPENDENCIES
   sass-rails (>= 6)
   sidekiq (~> 6.2.1)
   standard (~> 1.1.1)
+  syslog_parser (~> 0.1.0)
   tailwindcss-rails (~> 0.3.3)
   tzinfo-data
 
