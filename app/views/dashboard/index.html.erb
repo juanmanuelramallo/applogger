@@ -21,6 +21,10 @@
           <%= date_field_tag 'to_date', @to_time.to_date, class: input_class %>
         </div>
         <div>
+          <%= label_tag 'format', 'Request Format', class: label_class %>
+          <%= select_tag 'format', options_for_select([nil, *@dashboard.request_formats], params[:format]), class: input_class %>
+        </div>
+        <div>
           <%= label_tag 'user_agent', 'User agent', class: label_class %>
           <%= select_tag 'user_agent', options_for_select([nil, *@dashboard.user_agents], params[:user_agent]), class: input_class %>
         </div>

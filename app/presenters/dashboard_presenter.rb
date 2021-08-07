@@ -23,6 +23,10 @@ class DashboardPresenter
     entries.pluck(:country_code).uniq.sort
   end
 
+  def request_formats
+    entries.pluck(:format).uniq.sort
+  end
+
   private
 
   def entries

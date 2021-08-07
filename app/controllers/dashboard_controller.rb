@@ -14,7 +14,7 @@ class DashboardController < ApplicationController
   end
 
   def entries_params
-    params.permit(:user_agent, :path, :country_code)
+    params.permit(:user_agent, :path, :country_code, :format)
   end
 
   def from_time
