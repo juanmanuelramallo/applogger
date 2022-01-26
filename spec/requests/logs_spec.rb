@@ -16,7 +16,7 @@ RSpec.describe 'Logs' do
     it "render a log when filtering by id" do
       log = create(:log, message: 'Single log')
       create(:log, message: 'Another message')
-      get logs_path, params: { id: log.id }, headers: basic_authorization_header
+      get logs_path, params: {id: log.id}, headers: basic_authorization_header
 
       assert_select 'span[title="Message"]', 'Single log'
       assert_select 'span[title="Message"]', text: 'Another message', count: 0
