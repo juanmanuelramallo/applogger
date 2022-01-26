@@ -1,32 +1,59 @@
 <%= content_for(:title) { 'Logs' } %>
 
-<div>
-  <ul>
-    <% span_class = "mr-2" %>
-    <% @logs.each do |log| %>
-      <li class="mb-2">
-        <span class="<%= span_class %> text-gray-500" title="ID">
-          <%= log.id %>
-        </span>
+<div class="grid lg:grid-cols-12 gap-4">
+  <div class="lg:col-span-3 xl:col-span-2">
+    <div class="rounded-lg shadow h-full p-4">
+      <%= form_tag logs_path, method: :get do %>
+        <% input_class = "w-full border-b-2 border-gray-200 mb-2 rounded" %>
+        <% label_class = "w-full block text-sm font-medium text-gray-600" %>
+        <div>
+          <%= label_tag 'id', 'ID', class: label_class %>
+          <%= text_field_tag 'id', params[:id], class: input_class %>
+        </div>
 
-        <span class="<%= span_class %> underline decoration-2 decoration-emerald-600" title="Timestamp">
-          <%= l log.timestamp %>
-        </span>
+        <%= submit_tag "Apply", class: 'text-gray-600 font-medium mt-2 cursor-pointer w-full rounded py-1 px-4 border-2 border-gray-200 bg-transparent hover:bg-gray-100' %>
+        <%= link_to "Clear all", logs_path, class: 'text-gray-600 block mt-2' %>
+      <% end %>
 
-        <span class="<%= span_class %> text-gray-500" title="App Name">
-          <%= log.app_name %>
-        </span>
+    </div>
+  </div>
 
-        <span class="<%= span_class %> underline decoration-2 decoration-sky-600" title="Process Name">
-          <%= log.process_name %>
-        </span>
+  <div class="lg:col-span-9 xl:col-span-10">
+    <% if @logs.any? %>
+      <ul>
+        <% span_class = "mr-2" %>
+        <% @logs.each do |log| %>
+          <li class="mb-2" id="<%= dom_id(log) %>">
+            <span class="<%= span_class %> text-gray-500" title="ID">
+              <%= log.id %>
+            </span>
 
-        <span class="<%= span_class %> block break-words" title="Message">
-          <%= log.message %>
-        </span>
-      </li>
+            <span class="<%= span_class %> underline decoration-2 decoration-emerald-600" title="Timestamp">
+              <%= l log.timestamp %>
+            </span>
+
+            <span class="<%= span_class %> text-gray-500" title="App Name">
+              <%= log.app_name %>
+            </span>
+
+            <span class="<%= span_class %> underline decoration-2 decoration-sky-600" title="Process Name">
+              <%= log.process_name %>
+            </span>
+
+            <span class="<%= span_class %> block break-words" title="Message">
+              <%= log.message %>
+            </span>
+          </li>
+        <% end %>
+      </ul>
+    <% else %>
+      <p class="text-center text-gray-500 font-medium mb-4">
+        No logs found.
+      </p>
     <% end %>
-  </ul>
+  </div>
 </div>
 
-<%== render partial: 'pagy/nav', locals: {pagy: @pagy} %>
+<% if @logs.size > 1 %>
+  <%== render partial: 'pagy/nav', locals: {pagy: @pagy} %>
+<% end %>

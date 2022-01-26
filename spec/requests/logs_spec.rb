@@ -12,6 +12,21 @@ RSpec.describe 'Logs' do
       assert_select 'span[title="Message"]', 'Logging a message'
       assert_select 'span[title="Message"]', 'Another message'
     end
+
+    it "render a log when filtering by id" do
+      log = create(:log, message: 'Single log')
+      create(:log, message: 'Another message')
+      get logs_path, params: { id: log.id }, headers: basic_authorization_header
+
+      assert_select 'span[title="Message"]', 'Single log'
+      assert_select 'span[title="Message"]', text: 'Another message', count: 0
+    end
+
+    it "renders a message if there are no logs" do
+      subject
+
+      assert_select 'p', 'No logs found.'
+    end
   end
 
   describe 'POST /logs' do

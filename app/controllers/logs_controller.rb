@@ -1,6 +1,8 @@
 class LogsController < ApplicationController
   def index
-    @pagy, @logs = pagy(Log.all.order(timestamp: :desc))
+    @logs = Log.all.order(timestamp: :desc)
+    @logs = @logs.where(id: params[:id]) if params[:id].present?
+    @pagy, @logs = pagy(@logs)
   end
 
   def create
