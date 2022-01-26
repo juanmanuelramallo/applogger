@@ -12,7 +12,7 @@ class TransformLogsWorker
       if attributes.present?
         Entry.create!(attributes.compact.merge(timestamp: log.timestamp, log_id: log.id))
       else
-        log.destroy!
+        log.destroy! unless Config.keep_logs?
       end
     end
   end

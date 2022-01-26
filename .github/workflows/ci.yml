@@ -34,10 +34,9 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Setup Ruby
-      uses: actions/setup-ruby@v1
+    - uses: ruby/setup-ruby@v1
       with:
-        ruby-version: 2.7.x
+        bundler-cache: true
 
     - name: Install PostgreSQL 11 client
       run: |
@@ -46,17 +45,8 @@ jobs:
       run: |
         wget --quiet --output-document "./maxmind.mmdb" "https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-Country&license_key=${{ env.MAXMIND_LICENSE_KEY }}&suffix=tar.gz"
         tar -xvf ./maxmind.mmdb --directory ./ --no-anchored --strip-components=1 ${{ env.GEOIP_GEOLITE2_COUNTRY_FILENAME }}
-    - uses: actions/cache@v2
-      with:
-        path: vendor/bundle
-        key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-gems-
     - name: Build App
       run: |
-        bundle config path vendor/bundle
-        gem install bundler
-        bundle install --jobs 4 --retry 3
         bin/rails db:setup
         bin/rails assets:precompile
     - name: Linter

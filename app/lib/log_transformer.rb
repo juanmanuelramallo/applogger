@@ -8,7 +8,7 @@ class LogTransformer
     'ip',
     'user_agent'
   ].freeze
-  MATCHER_REGEXP = /#{ENV.fetch('LOG_LINE_KEY')}=(?<data>\{.+\})/.freeze
+  MATCHER_REGEXP = /#{ENV.fetch('LOG_LINE_KEY')}=(?<data>\{.+\})/
 
   attr_reader :log
 

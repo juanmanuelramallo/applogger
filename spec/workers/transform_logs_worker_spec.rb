@@ -32,5 +32,17 @@ RSpec.describe TransformLogsWorker, type: :worker do
 
       expect { subject }.to change { Log.count }.by(-1)
     end
+
+    context "when keep logs is enabled" do
+      before do
+        stub_const "ENV", ENV.to_h.merge("CONFIG_KEEP_LOGS" => "true")
+      end
+
+      it 'does not remove unprocessed logs' do
+        logs
+
+        expect { subject }.not_to change { Log.count }
+      end
+    end
   end
 end

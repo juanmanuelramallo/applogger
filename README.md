@@ -59,6 +59,11 @@ HTTP Basic Auth is used to protect all endpoints.
 
 Set the env vars HTTP_BASIC_AUTH_NAME and HTTP_BASIC_AUTH_PASSWORD with your desired credentials.
 
+## Configuration
+
+#### Keep logs
+Set the `CONFIG_KEEP_LOGS` to `true` in order to make the app maintain all logs.
+
 # Contributing
 
 ## Development
