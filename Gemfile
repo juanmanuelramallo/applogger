@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '~> 2.7.2'
+ruby '~> 3.0.3'
 
 gem 'browser', '~> 5.3.1', require: "browser/browser"
 gem 'chartkick', '~> 4.0.4'
