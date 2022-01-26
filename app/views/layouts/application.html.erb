@@ -6,8 +6,7 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag "inter-font" %>
-    <%= stylesheet_link_tag "tailwind" %>
+    <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag 'application', media: 'all' %>
 
     <%= content_for :head %>
@@ -15,8 +14,8 @@
 
   <body class="bg-gray-50">
     <%= render 'application/header' %>
-    <div class="bg-white mx-8 rounded p-8 shadow-sm">
+    <main class="bg-white mx-8 rounded p-8 shadow-sm">
       <%= yield %>
-    </div>
+    </main>
   </body>
 </html>

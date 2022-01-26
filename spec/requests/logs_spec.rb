@@ -9,8 +9,8 @@ RSpec.describe 'Logs' do
       create(:log, message: 'Another message')
       subject
 
-      assert_select 'td', 'Logging a message'
-      assert_select 'td', 'Another message'
+      assert_select 'span[title="Message"]', 'Logging a message'
+      assert_select 'span[title="Message"]', 'Another message'
     end
   end
 
