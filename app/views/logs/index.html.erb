@@ -11,6 +11,11 @@
           <%= text_field_tag 'id', params[:id], class: input_class %>
         </div>
 
+        <div>
+          <%= label_tag 'message', 'Log contains', class: label_class %>
+          <%= text_field_tag 'message', params[:message], class: input_class %>
+        </div>
+
         <%= submit_tag "Apply", class: 'text-gray-600 font-medium mt-2 cursor-pointer w-full rounded py-1 px-4 border-2 border-gray-200 bg-transparent hover:bg-gray-100' %>
         <%= link_to "Clear all", logs_path, class: 'text-gray-600 block mt-2' %>
       <% end %>
@@ -55,5 +60,10 @@
 </div>
 
 <% if @logs.size > 1 %>
-  <%== render partial: 'pagy/nav', locals: {pagy: @pagy} %>
+  <div class="flex flex-col mt-4">
+    <div class="text-center text-gray-400">
+      <%= raw pagy_info(@pagy, item_name: "Log".pluralize(@pagy.count)) %>
+    </div>
+    <%== render partial: 'pagy/nav', locals: {pagy: @pagy} %>
+  </div>
 <% end %>

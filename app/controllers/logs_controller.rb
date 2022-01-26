@@ -2,6 +2,7 @@ class LogsController < ApplicationController
   def index
     @logs = Log.all.order(timestamp: :desc)
     @logs = @logs.where(id: params[:id]) if params[:id].present?
+    @logs = @logs.search_by_message(params[:message]) if params[:message].present?
     @pagy, @logs = pagy(@logs)
   end
 

@@ -14,5 +14,13 @@
 #  updated_at     :datetime         not null
 #
 class Log < ApplicationRecord
+  include PgSearch::Model
+
   has_one :entry
+
+  pg_search_scope :search_by_message,
+    against: :message,
+    using: {
+      tsearch: {prefix: true}
+    }
 end
