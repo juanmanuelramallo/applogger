@@ -81,7 +81,8 @@ CREATE TABLE public.logs (
     process_name character varying NOT NULL,
     message text NOT NULL,
     created_at timestamp(6) without time zone NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL
+    updated_at timestamp(6) without time zone NOT NULL,
+    searchable tsvector GENERATED ALWAYS AS (to_tsvector('english'::regconfig, COALESCE(message, ''::text))) STORED
 );
 
 
@@ -167,6 +168,13 @@ CREATE INDEX index_entries_on_log_id ON public.entries USING btree (log_id);
 
 
 --
+-- Name: index_logs_on_searchable; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_logs_on_searchable ON public.logs USING gin (searchable);
+
+
+--
 -- Name: entries fk_rails_fb011048c1; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -183,6 +191,8 @@ SET search_path TO "$user", public;
 INSERT INTO "schema_migrations" (version) VALUES
 ('20210515215304'),
 ('20210516202524'),
-('20210519220055');
+('20210519220055'),
+('20220205212955'),
+('20220205215959');
 
 
