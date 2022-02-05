@@ -16,6 +16,7 @@ jobs:
     env:
       PGHOST: localhost
       PGUSER: postgres
+      PGPASSWORD: postgres
       RAILS_ENV: test
       HTTP_BASIC_AUTH_NAME: authname
       HTTP_BASIC_AUTH_PASSWORD: authpassword
@@ -25,12 +26,17 @@ jobs:
 
     services:
       postgres:
-        image: postgres:11.5
+        image: postgres:14.1
         env:
           POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
           POSTGRES_DB: postgres
         ports: ["5432:5432"]
-        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
 
     steps:
     - uses: actions/checkout@v2
@@ -38,7 +44,7 @@ jobs:
       with:
         bundler-cache: true
 
-    - name: Install PostgreSQL 11 client
+    - name: Install PostgreSQL client
       run: |
         sudo apt-get -yqq install libpq-dev
     - name: MaxMind Database
