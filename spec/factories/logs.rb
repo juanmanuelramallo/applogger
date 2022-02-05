@@ -5,7 +5,7 @@ FactoryBot.define do
     timestamp { Time.now }
     host { 'host' }
     app_name { 'myapp' }
-    process_name { 'web.1' }
-    message { 'Some message' }
+    process_name { ['web.1', 'web.2', 'worker.1', 'worker.2'].sample }
+    message { Faker::Lorem.paragraph(sentence_count: rand(4..12)) }
   end
 end
